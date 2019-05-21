@@ -1,26 +1,88 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import Row from './component/Row';
+import {checkAll} from './logic/logic';
+
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends Component {
+  state = {
+    board: [],
+    msg: 'Player 1, please select a coin spot',
+    curPlayer: null, 
+    gameOver: false,
+  }
+
+  initBoard = () => {
+    let newBoard = new Array(6).fill(null).map(
+      () => new Array(7).fill(null)
+    );
+    this.setState({
+      board: newBoard,
+      gameOver: false,
+      msg: 'Player 1, please select a coin spot',
+      curPlayer:'orange' // curPlayer is the next player
+    });
+  };
+
+  componentDidMount() {
+    this.initBoard();
+  }
+
+  clickBoard = (r,c) => {
+    const {gameOver, curPlayer, board} = this.state;
+    if (!gameOver) {
+
+      let newBoard = board;
+      if (newBoard[r][c] !== null) return;
+      newBoard[r][c] = curPlayer === 'purple' ? 'purple' : 'orange';
+      this.setState({ 
+        curPlayer: curPlayer === 'orange' ? 'purple' : 'orange',
+        board: newBoard,
+        msg: newBoard[r][c] === 'orange' ? 'Player 2, please select a coin spot' : 'Player 1, please select a coin spot'
+      })
+        let res = checkAll(board);
+
+      if (res) {
+        console.log()
+        this.setState({
+          msg: `${res === 'orange' ? 'Player 1' : 'Player 2'} wins!!!`,
+          curPlayer: res,
+          gameOver: true
+        })
+      }
+    } else {
+      this.setState({ msg: 'Game over. Please start a new game.' });
+    }
+  }
+
+  render() {
+    const { board, msg, gameOver, curPlayer } = this.state;
+    return (
+      <div className="App">
+      {gameOver &&
+            <img src={'https://media1.giphy.com/media/l0Exj6t3iK0Xzv00E/source.gif'} alt='win'/>
+      }
+      <div>
+        <p className={'msg ' + (curPlayer)}>{msg}</p>
+      </div>
+        <table>
+          <thead></thead>
+          <tbody>
+           {board.map((row,i) => (
+             <Row 
+             key ={i} 
+             row={row}
+             rowIndex = {i}
+             clickBoard={this.clickBoard}
+             />
+           ))}
+          </tbody>
+        </table>
+        <button onClick = {this.initBoard}>Reset</button>
+      </div>
+    );
+  }
 }
 
 export default App;

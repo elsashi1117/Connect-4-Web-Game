@@ -1,33 +1,100 @@
 .App {
+  margin: 5%;
   text-align: center;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+img {
+  height: 150px
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.msg {
+  width: 50%;
+  height: 35px;
+  margin: 10px auto;
+  font-weight: bold;
+  font-size: 1.1em;
   color: white;
+  text-align: center;
+  font-family: "Bevan";
+  text-shadow: 2px 2px 4px rgb(114, 114, 110);
+  line-height: 35px;
+  border-radius: 25px;
 }
 
-.App-link {
-  color: #61dafb;
+table {
+  margin: 40px auto;
+  width: 50%;
+  padding: 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.cell {
+  height: 100px;
+  width: 100px;
+  background-color: navy;
+  /* display: table-cell; */
+  text-align: center;
+  vertical-align: middle;
+}
+
+.circle {
+  width: 70%;
+  height: 70%;
+  border-radius: 50%;
+  background-color: aliceblue;
+  display: inline-block;
+  margin-top: 15%;
+  
+}
+
+.orange {
+  background-color: orange;
+  -moz-box-shadow:    inset 0 0 10px #000000;
+  -webkit-box-shadow: inset 0 0 10px #000000;
+  box-shadow:         inset 0 0 10px #000000;
+}
+
+.purple {
+  background-color: purple;
+  -moz-box-shadow:    inset 0 0 10px #000000;
+  -webkit-box-shadow: inset 0 0 10px #000000;
+  box-shadow:         inset 0 0 10px #000000;
+}
+
+.center {
+  margin-top: 30%; 
+}
+
+.inner {
+  -moz-box-shadow:    inset 0 0 10px #000000;
+  -webkit-box-shadow: inset 0 0 10px #000000;
+  box-shadow:         inset 0 0 10px #000000;
+}
+
+button {
+  
+  font-size: 1em;
+  text-transform: uppercase;
+  padding: 7px 10px;
+  left: 50%;
+  width: 150px;
+  top: 50%;
+  border-radius: 10px;
+  color: white;
+  text-shadow: -1px -1px 1px black;
+  border: 5px solid transparent;
+  border-bottom-color: rgba(0,0,0,0.35);
+  background: navy;
+  cursor: pointer;
+  outline: 0 !important;
+
+}
+
+button:hover {
+  background: rgb(30, 67, 141);
+}
+
+button:active {
+  border-bottom-width: 0;
+  margin-top: 5px;
 }
