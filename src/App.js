@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Row from './component/Row';
-import {checkAll} from './logic/logic';
+import { checkAll } from './logic/logic';
 
 import './App.css';
 
@@ -9,7 +9,7 @@ class App extends Component {
   state = {
     board: [],
     msg: 'Player 1, please select a coin spot',
-    curPlayer: null, 
+    curPlayer: null,
     gameOver: false,
   }
 
@@ -21,7 +21,7 @@ class App extends Component {
       board: newBoard,
       gameOver: false,
       msg: 'Player 1, please select a coin spot',
-      curPlayer:'orange' // curPlayer is the next player
+      curPlayer: 'orange' // curPlayer is the next player
     });
   };
 
@@ -29,24 +29,35 @@ class App extends Component {
     this.initBoard();
   }
 
-  clickBoard = (r,c) => {
-    const {gameOver, curPlayer, board} = this.state;
+  clickBoard = (r, c) => {
+    const { gameOver, curPlayer, board } = this.state;
     if (!gameOver) {
 
       let newBoard = board;
       if (newBoard[r][c] !== null) return;
       newBoard[r][c] = curPlayer === 'purple' ? 'purple' : 'orange';
-      this.setState({ 
+      this.setState({
         curPlayer: curPlayer === 'orange' ? 'purple' : 'orange',
         board: newBoard,
         msg: newBoard[r][c] === 'orange' ? 'Player 2, please select a coin spot' : 'Player 1, please select a coin spot'
       })
-        let res = checkAll(board);
+      let res = checkAll(board, r, c);
 
-      if (res) {
-        console.log()
+      if (res === 'orange') {
         this.setState({
-          msg: `${res === 'orange' ? 'Player 1' : 'Player 2'} wins!!!`,
+          msg: `${'Player 1'} wins !!!`,
+          curPlayer: res,
+          gameOver: true
+        })
+      } else if (res === 'purple') {
+        this.setState({
+          msg: `${'Player 2'} wins !!!`,
+          curPlayer: res,
+          gameOver: true
+        })
+      } else if (res === 'draw') {
+        this.setState({
+          msg: 'Draw Game',
           curPlayer: res,
           gameOver: true
         })
@@ -60,26 +71,26 @@ class App extends Component {
     const { board, msg, gameOver, curPlayer } = this.state;
     return (
       <div className="App">
-      {gameOver &&
-            <img src={'https://media1.giphy.com/media/l0Exj6t3iK0Xzv00E/source.gif'} alt='win'/>
-      }
-      <div>
-        <p className={'msg ' + (curPlayer)}>{msg}</p>
-      </div>
+        {gameOver &&
+          <img src={'https://media1.giphy.com/media/l0Exj6t3iK0Xzv00E/source.gif'} alt='win' />
+        }
+        <div>
+          <p className={'msg ' + (curPlayer)}>{msg}</p>
+        </div>
         <table>
           <thead></thead>
           <tbody>
-           {board.map((row,i) => (
-             <Row 
-             key ={i} 
-             row={row}
-             rowIndex = {i}
-             clickBoard={this.clickBoard}
-             />
-           ))}
+            {board.map((row, i) => (
+              <Row
+                key={i}
+                row={row}
+                rowIndex={i}
+                clickBoard={this.clickBoard}
+              />
+            ))}
           </tbody>
         </table>
-        <button onClick = {this.initBoard}>Reset</button>
+        <button onClick={this.initBoard}>Reset</button>
       </div>
     );
   }
