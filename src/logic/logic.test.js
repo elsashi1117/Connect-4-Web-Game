@@ -20,7 +20,7 @@ describe('test checkAll functions', () => {
         let board = [
             ["purple", "purple", "purple", null, null, null, null],
             [null, null, null, "orange", null, null, null],
-            [null, null, null, "orange", "orange", "orange", null],
+            [null, "orange", "purple", "orange", "orange", "orange", null],
             [null, null, null, "orange", null, null, null],
             [null, null, null, "orange", "orange", "orange", null],
             [null, null, null, "purple", "purple", "purple", "purple"]

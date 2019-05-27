@@ -18,22 +18,39 @@ export const checkHorizontal = (board, r, c) => {
     } else return null;
 }
 
-export const checkVertical = board => {
-    for (let j = 0; j < board[0].length; j++) {
-        let count = 1, pre = board[0][j];
-        for (let i = 1; i < board.length; i++) {
-          if (board[i][j] === pre && board[i][j]!== null) {
-              count++;
-              if (count === 4) {
-                  return board[i][j];
-              }
-          } else {
-              pre = board[i][j];
-              count = 1;
-          }
-        }
+export const checkVertical = (board, r, c) => {
+    let i = r, count = 1;
+    while (r > 0) {
+        if (board[i][c] === board[i-1][c]) {
+            count++;
+            i--;
+        } else break;
     }
-    return null;
+    i = r;
+    while (i < board.length - 1) {
+        if (board[i][c] === board[i+1][c]) {
+            count++;
+            i++;
+        } else break;
+    } 
+    if (count >= 4 ) {
+        return board[r][c];
+    } else return null;
+    // for (let j = 0; j < board[0].length; j++) {
+    //     let count = 1, pre = board[0][j];
+    //     for (let i = 1; i < board.length; i++) {
+    //       if (board[i][j] === pre && board[i][j]!== null) {
+    //           count++;
+    //           if (count === 4) {
+    //               return board[i][j];
+    //           }
+    //       } else {
+    //           pre = board[i][j];
+    //           count = 1;
+    //       }
+    //     }
+    // }
+    // return null;
 }
 
 // const checkTopDiagonal2 = (board, r, c, number) => {
