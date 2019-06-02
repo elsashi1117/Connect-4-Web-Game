@@ -23,7 +23,7 @@ describe('test App component', () => {
     // wrapper.instance().clickBoard = jest.fn(); 
     // wrapper.instance().forceUpdate()
     // wrapper.update();
-    wrapper.find('Row').first().find('Cell').at(0).find('.cell').prop('onClick')();
+    wrapper.find('.cell').at(0).prop('onClick')();
     // console.log(wrapper.instance.debug())
     // expect(wrapper.instance().clickBoard).toHaveBeenCalled();
     //only update twice can haveBeenCalled,but I shouldn test if it is called only when clickBoard is props.
