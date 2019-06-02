@@ -45,12 +45,15 @@ describe('test App component', () => {
     ],
     curPlayer: "purple"
     })
-    wrapper.find('Row').first().find('Cell').at(3).find('.cell').simulate('click',{r: 0, c: 3});
-    // console.log(wrapper.state('board'))
+    expect(wrapper.find("img").exists()).toBe(false);
+    wrapper.find('.cell').at(3).simulate('click',{r: 0, c: 3});
+    // wrapper.find('Row').first().find('Cell').at(3).find('.cell').simulate('click',{r: 0, c: 3});
+    // console.log(wrapper.find('.cell').at(24).debug())
     expect(wrapper.find('p').first().text()).toEqual('Player 2 wins !!!');
     expect(wrapper.state('gameOver')).toEqual(true);
     wrapper.find('Row').first().find('Cell').at(3).find('.cell').simulate('click',{r: 1, c: 3});
     expect(wrapper.find('p').first().text()).toEqual('Game over. Please start a new game.');
+    expect(wrapper.find("img").exists()).toBe(true);
   })
 
 })
