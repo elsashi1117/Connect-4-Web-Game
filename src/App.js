@@ -4,7 +4,6 @@ import { checkAll } from './logic/logic';
 
 import './App.css';
 
-
 class App extends Component {
   state = {
     board: [],
